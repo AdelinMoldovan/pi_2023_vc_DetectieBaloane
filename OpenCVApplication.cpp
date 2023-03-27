@@ -1,4 +1,4 @@
-// OpenCVApplication.cpp : Defines the entry point for the console application.
+﻿// OpenCVApplication.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -64,6 +64,27 @@ void testColor2Gray()
 	}
 }
 
+void detectLines() {
+	// Încarcă imaginea
+	Mat image;
+	char fname[MAX_PATH];
+	while (openFileDlg(fname)) {
+		image = imread(fname, IMREAD_ANYCOLOR);
+		// Aplică filtrul Gaussian
+		Mat blurred;
+		GaussianBlur(image, blurred, Size(5, 5), 0);
+
+		// Detectează marginile cu algoritmul Canny
+		Mat edges;
+		Canny(blurred, edges, 50, 150);
+
+		// Afișează imaginea inițială și marginile detectate
+		imshow("Imaginea initiala", image);
+		imshow("Marginile detectate", edges);
+		waitKey(0);
+	}
+}
+
 
 int main()
 {
@@ -76,6 +97,7 @@ int main()
 		printf(" 1 - Basic image opening...\n");
 		printf(" 2 - Open BMP images from folder\n");
 		printf(" 3 - Color to Gray\n");
+		printf(" 4 - Detect Line\n");
 		printf(" 0 - Exit\n\n");
 		printf("Option: ");
 		scanf("%d",&op);
@@ -90,6 +112,10 @@ int main()
 			case 3:
 				testColor2Gray();
 				break;
+			case 4:
+				detectLines();
+				break;
+			
 		}
 	}
 	while (op!=0);
