@@ -1,9 +1,11 @@
 // OpenCVApplication.cpp : Defines the entry point for the console application.
 //
-
 #include "stdafx.h"
 #include "common.h"
-
+#include "Test.h"
+#include <iostream>
+#include <fstream>
+#include <vector>
 
 void testOpenImage()
 {
@@ -64,6 +66,19 @@ void testColor2Gray()
 	}
 }
 
+void testFindBaloons()
+{
+	char fname[MAX_PATH];
+	while (openFileDlg(fname))
+	{
+		Mat_<Vec3b> src;
+		src = imread(fname, IMREAD_COLOR);
+		const auto baloons = getBaloons(fname);
+		drawBaloons(src, baloons);
+		imshow("opened image", src);
+		waitKey();
+	}
+}
 
 int main()
 {
@@ -76,6 +91,7 @@ int main()
 		printf(" 1 - Basic image opening...\n");
 		printf(" 2 - Open BMP images from folder\n");
 		printf(" 3 - Color to Gray\n");
+		printf(" 4 - TestBaloons\n");
 		printf(" 0 - Exit\n\n");
 		printf("Option: ");
 		scanf("%d",&op);
@@ -89,6 +105,9 @@ int main()
 				break;
 			case 3:
 				testColor2Gray();
+				break;
+			case 4:
+				testFindBaloons();
 				break;
 		}
 	}

@@ -360,3 +360,10 @@ MigrationBackup/
 /stdafx.h
 /targetver.h
 /Videos
+/stdafx.cpp
+/stdafx.cpp
+/stdafx.cpp
+/json/json.h
+/jsoncpp.cpp
+/json/json-forwards.h
+/balloon
