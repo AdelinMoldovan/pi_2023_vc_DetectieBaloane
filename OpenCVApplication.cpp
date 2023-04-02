@@ -1,4 +1,4 @@
-// OpenCVApplication.cpp : Defines the entry point for the console application.
+﻿// OpenCVApplication.cpp : Defines the entry point for the console application.
 //
 #include "stdafx.h"
 #include "common.h"
@@ -66,19 +66,40 @@ void testColor2Gray()
 	}
 }
 
-void testFindBaloons()
+void testFindBalloons()
 {
 	char fname[MAX_PATH];
 	while (openFileDlg(fname))
 	{
 		Mat_<Vec3b> src;
 		src = imread(fname, IMREAD_COLOR);
-		const auto baloons = getBaloons(fname);
-		drawBaloons(src, baloons);
+		const auto baloons = getBalloons(fname);
+		drawBalloons(src, baloons);
 		imshow("opened image", src);
 		waitKey();
 	}
 }
+void detectLines() {
+	// Încarcă imaginea
+	Mat image;
+	char fname[MAX_PATH];
+	while (openFileDlg(fname)) {
+		image = imread(fname, IMREAD_ANYCOLOR);
+		// Aplică filtrul Gaussian
+		Mat blurred;
+		GaussianBlur(image, blurred, Size(5, 5), 0);
+
+		// Detectează marginile cu algoritmul Canny
+		Mat edges;
+		Canny(blurred, edges, 50, 150);
+
+		// Afișează imaginea inițială și marginile detectate
+		imshow("Imaginea initiala", image);
+		imshow("Marginile detectate", edges);
+		waitKey(0);
+	}
+}
+
 
 int main()
 {
@@ -91,7 +112,7 @@ int main()
 		printf(" 1 - Basic image opening...\n");
 		printf(" 2 - Open BMP images from folder\n");
 		printf(" 3 - Color to Gray\n");
-		printf(" 4 - TestBaloons\n");
+		printf(" 4 - TestBalloons\n");
 		printf(" 0 - Exit\n\n");
 		printf("Option: ");
 		scanf("%d",&op);
@@ -107,7 +128,7 @@ int main()
 				testColor2Gray();
 				break;
 			case 4:
-				testFindBaloons();
+				testFindBalloons();
 				break;
 		}
 	}

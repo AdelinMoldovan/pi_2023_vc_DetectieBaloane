@@ -3,14 +3,14 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <vector>
 
-class Baloon {
+class Balloon {
 private:
 	std::vector<cv::Point> points;
 public:
-	friend void drawBaloons(cv::Mat& img, std::vector<Baloon> baloons);
+	friend void drawBalloons(cv::Mat& img, std::vector<Balloon> baloons);
 	inline void addPoint(int x, int y) {
 		points.emplace_back(x, y);
 	}
 };
-void drawBaloons(cv::Mat& img, std::vector<Baloon> baloons);
-std::vector<Baloon> getBaloons(std::string imagePath);
+void drawBalloons(cv::Mat& img, std::vector<Balloon> balloons);
+std::vector<Balloon> getBalloons(std::string imagePath);

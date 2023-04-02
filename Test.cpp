@@ -17,15 +17,15 @@ Json::Value getJson(std::string filename) {
 	return root;
 }
 
-void drawBaloons(cv::Mat& img, std::vector<Baloon> baloons) {
+void drawBalloons(cv::Mat& img, std::vector<Balloon> balloons) {
 	std::vector<std::vector<cv::Point>> contours;
-	for (const auto& baloon : baloons) {
-		contours.push_back(baloon.points);
+	for (const auto& balloon : balloons) {
+		contours.push_back(balloon.points);
 	}
 	cv::fillPoly(img, contours, cv::Scalar(255, 255, 255));
 }
 
-std::vector<Baloon> getBaloons(std::string imagePath) {
+std::vector<Balloon> getBalloons(std::string imagePath) {
 	size_t lastSeparatorPos = imagePath.find_last_of("\\/");
 	std::string imageName = imagePath.substr(lastSeparatorPos + 1);
 	std::string jsonName = imagePath.substr(0, lastSeparatorPos + 1) + "via_region_data.json";
@@ -35,18 +35,18 @@ std::vector<Baloon> getBaloons(std::string imagePath) {
 		if (key.rfind(imageName, 0) == 0)
 			image = root[key];
 	}
-	std::vector<Baloon> baloons;
+	std::vector<Balloon> balloons;
 	for (const std::string& key : image["regions"].getMemberNames()) {
 		auto region = image["regions"][key]["shape_attributes"];
-		Baloon baloon;
+		Balloon balloon;
 		const auto& xArray = region["all_points_x"];
 		const auto& yArray = region["all_points_y"];
 		for (Json::ArrayIndex i = 0; i < xArray.size(); ++i) {
 			int x = xArray[i].asInt();
 			int y = yArray[i].asInt();
-			baloon.addPoint(x, y);
+			balloon.addPoint(x, y);
 		}
-		baloons.push_back(baloon);
+		balloons.push_back(balloon);
 	}
-	return baloons;
+	return balloons;
 }
