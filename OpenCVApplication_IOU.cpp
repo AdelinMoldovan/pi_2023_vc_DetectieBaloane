@@ -448,18 +448,6 @@ void TestIOU()
 		Mat testBaloons3b;
 		cvtColor(testBaloons, testBaloons3b, COLOR_GRAY2BGR);
 
-		std::cout << "Detected baloons: ";
-		std::cout << detectedBaloons.rows;
-		std::cout << "\n";
-		std::cout << detectedBaloons.cols;
-		std::cout << "\n";
-
-		std::cout << "Test baloons: ";
-		std::cout << detectedBaloons.rows;
-		std::cout << "\n";
-		std::cout << detectedBaloons.cols;
-		std::cout << "\n";
-
 		int _union = 0;
 		int _intersection = 0;
 		for (int i = 0; i < detectedBaloons.rows - 1; i++) {
