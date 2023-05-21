@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "Test.h"
+#include "test.h"
 #include "json/json.h"
 #include <iostream>
 #include <fstream>

@@ -1,3 +1,5 @@
+#ifndef BALLOON_TEST_H
+#define BALLOON_TEST_H
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -14,3 +16,4 @@ public:
 };
 void drawBalloons(cv::Mat& img, std::vector<Balloon> balloons);
 std::vector<Balloon> getBalloons(std::string imagePath);
+#endif // !BALLOON_TEST_H
